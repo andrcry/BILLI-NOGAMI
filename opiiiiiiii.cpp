@@ -6,11 +6,11 @@
 #include <windows.h>
 using namespace std;
 
-// ---------------------------- СТРУКТУРИ ----------------------------
+cout << "--- РљРђРўРђР›РћР“ РўРћР’РђР Р†Р’ (v2.0) ---" << endl;
 struct User {
     string username;
     string password;
-    string role; // admin або customer
+    string role; // admin Г ГЎГ® customer
 };
 
 struct Book {
@@ -22,7 +22,7 @@ struct Book {
     double rating;
 };
 
-// ---------------------------- КОРИСТУВАЧІ ----------------------------
+// ---------------------------- ГЉГЋГђГ€Г‘Г’Г“Г‚ГЂГ—ВІ ----------------------------
 void initializeUsers(vector<User>& users) {
     users.push_back({ "admin", "admin123", "admin" });
     users.push_back({ "user", "111", "customer" });
@@ -33,113 +33,113 @@ User* performLogin(vector<User>& userDb) {
     string inputUsername, inputPassword;
     const int maxAttempts = 3;
 
-    cout << "\n=== ВХІД У СИСТЕМУ ===" << endl;
+    cout << "\n=== Г‚Г•ВІГ„ Г“ Г‘Г€Г‘Г’Г…ГЊГ“ ===" << endl;
 
     for (int attempt = 1; attempt <= maxAttempts; attempt++) {
-        cout << "Спроба " << attempt << " з " << maxAttempts << endl;
-        cout << "Логін: ";
+        cout << "Г‘ГЇГ°Г®ГЎГ  " << attempt << " Г§ " << maxAttempts << endl;
+        cout << "Г‹Г®ГЈВіГ­: ";
         cin >> inputUsername;
-        cout << "Пароль: ";
+        cout << "ГЏГ Г°Г®Г«Гј: ";
         cin >> inputPassword;
 
         for (auto& user : userDb) {
             if (user.username == inputUsername && user.password == inputPassword) {
-                cout << "\n[Успіх] Вітаю, " << user.username << "!" << endl;
+                cout << "\n[Г“Г±ГЇВіГµ] Г‚ВіГІГ Гѕ, " << user.username << "!" << endl;
                 return &user;
             }
         }
-        cout << "[Помилка] Невірний логін або пароль.\n" << endl;
+        cout << "[ГЏГ®Г¬ГЁГ«ГЄГ ] ГЌГҐГўВіГ°Г­ГЁГ© Г«Г®ГЈВіГ­ Г ГЎГ® ГЇГ Г°Г®Г«Гј.\n" << endl;
     }
 
-    cout << "[Відмова] Перевищено кількість спроб." << endl;
+    cout << "[Г‚ВіГ¤Г¬Г®ГўГ ] ГЏГҐГ°ГҐГўГЁГ№ГҐГ­Г® ГЄВіГ«ГјГЄВіГ±ГІГј Г±ГЇГ°Г®ГЎ." << endl;
     return nullptr;
 }
 
-// ---------------------------- КНИГИ ----------------------------
+// ---------------------------- ГЉГЌГ€ГѓГ€ ----------------------------
 void initializeBooks(vector<Book>& db) {
-    db.push_back({ 1, "Кобзар", "Тарас Шевченко", "Поезія", 350, 4.9 });
-    db.push_back({ 2, "Захар Беркут", "Іван Франко", "Історична повість", 200, 4.7 });
-    db.push_back({ 3, "Енеїда", "І. Котляревський", "Поема", 280, 4.8 });
+    db.push_back({ 1, "ГЉГ®ГЎГ§Г Г°", "Г’Г Г°Г Г± ГГҐГўГ·ГҐГ­ГЄГ®", "ГЏГ®ГҐГ§ВіГї", 350, 4.9 });
+    db.push_back({ 2, "Г‡Г ГµГ Г° ГЃГҐГ°ГЄГіГІ", "ВІГўГ Г­ Г”Г°Г Г­ГЄГ®", "ВІГ±ГІГ®Г°ГЁГ·Г­Г  ГЇГ®ГўВіГ±ГІГј", 200, 4.7 });
+    db.push_back({ 3, "Г…Г­ГҐВїГ¤Г ", "ВІ. ГЉГ®ГІГ«ГїГ°ГҐГўГ±ГјГЄГЁГ©", "ГЏГ®ГҐГ¬Г ", 280, 4.8 });
 }
 
 void displayAllBooks(const vector<Book>& db) {
-    cout << "\n--- КАТАЛОГ КНИГ ---" << endl;
+    cout << "\n--- ГЉГЂГ’ГЂГ‹ГЋГѓ ГЉГЌГ€Гѓ ---" << endl;
     if (db.empty()) {
-        cout << "Каталог порожній." << endl;
+        cout << "ГЉГ ГІГ Г«Г®ГЈ ГЇГ®Г°Г®Г¦Г­ВіГ©." << endl;
         return;
     }
 
-    cout << left << setw(5) << "ID" << setw(25) << "Назва" << setw(20) << "Автор" << "Ціна" << endl;
+    cout << left << setw(5) << "ID" << setw(25) << "ГЌГ Г§ГўГ " << setw(20) << "ГЂГўГІГ®Г°" << "Г–ВіГ­Г " << endl;
     cout << "------------------------------------------------------------" << endl;
 
     for (const auto& b : db)
-        cout << setw(5) << b.id << setw(25) << b.title << setw(20) << b.author << b.price << " грн\n";
+        cout << setw(5) << b.id << setw(25) << b.title << setw(20) << b.author << b.price << " ГЈГ°Г­\n";
 }
 
 void adminAddBook(vector<Book>& db) {
     Book newBook;
 
-    cout << "\n[ADMIN] Додати книгу" << endl;
+    cout << "\n[ADMIN] Г„Г®Г¤Г ГІГЁ ГЄГ­ГЁГЈГі" << endl;
 
     int maxId = 0;
     for (const auto& b : db) if (b.id > maxId) maxId = b.id;
     newBook.id = maxId + 1;
 
-    cout << "Назва: "; cin >> newBook.title;
-    cout << "Автор: "; cin >> newBook.author;
-    cout << "Опис: "; cin >> newBook.description;
-    cout << "Ціна: "; cin >> newBook.price;
-    cout << "Рейтинг: "; cin >> newBook.rating;
+    cout << "ГЌГ Г§ГўГ : "; cin >> newBook.title;
+    cout << "ГЂГўГІГ®Г°: "; cin >> newBook.author;
+    cout << "ГЋГЇГЁГ±: "; cin >> newBook.description;
+    cout << "Г–ВіГ­Г : "; cin >> newBook.price;
+    cout << "ГђГҐГ©ГІГЁГ­ГЈ: "; cin >> newBook.rating;
 
     db.push_back(newBook);
-    cout << "[OK] Книга додана." << endl;
+    cout << "[OK] ГЉГ­ГЁГЈГ  Г¤Г®Г¤Г Г­Г ." << endl;
 }
 
 void adminDeleteBook(vector<Book>& db) {
     int id;
     displayAllBooks(db);
 
-    cout << "\nВведіть ID для видалення: ";
+    cout << "\nГ‚ГўГҐГ¤ВіГІГј ID Г¤Г«Гї ГўГЁГ¤Г Г«ГҐГ­Г­Гї: ";
     cin >> id;
 
     auto it = remove_if(db.begin(), db.end(), [id](const Book& b) { return b.id == id; });
     if (it != db.end()) {
         db.erase(it, db.end());
-        cout << "[OK] Книга видалена." << endl;
+        cout << "[OK] ГЉГ­ГЁГЈГ  ГўГЁГ¤Г Г«ГҐГ­Г ." << endl;
     }
-    else cout << "[Помилка] ID не знайдено." << endl;
+    else cout << "[ГЏГ®Г¬ГЁГ«ГЄГ ] ID Г­ГҐ Г§Г­Г Г©Г¤ГҐГ­Г®." << endl;
 }
 
-// ---------------------------- КОШИК ----------------------------
+// ---------------------------- ГЉГЋГГ€ГЉ ----------------------------
 void addToCart(const vector<Book>& db, vector<Book>& cart) {
     int id;
-    cout << "Введіть ID книги: ";
+    cout << "Г‚ГўГҐГ¤ВіГІГј ID ГЄГ­ГЁГЈГЁ: ";
     cin >> id;
 
     for (const auto& b : db) {
         if (b.id == id) {
             cart.push_back(b);
-            cout << "[Кошик] Додано: " << b.title << endl;
+            cout << "[ГЉГ®ГёГЁГЄ] Г„Г®Г¤Г Г­Г®: " << b.title << endl;
             return;
         }
     }
-    cout << "Книгу не знайдено." << endl;
+    cout << "ГЉГ­ГЁГЈГі Г­ГҐ Г§Г­Г Г©Г¤ГҐГ­Г®." << endl;
 }
 
 void runCatalogModule(vector<Book>& db, vector<Book>& cart, const User* user) {
     int choice = 0;
 
     do {
-        cout << "\n--- МЕНЮ КАТАЛОГУ ---\n";
-        cout << "1. Показати всі книги\n";
-        cout << "2. Додати книгу в кошик\n";
+        cout << "\n--- ГЊГ…ГЌГћ ГЉГЂГ’ГЂГ‹ГЋГѓГ“ ---\n";
+        cout << "1. ГЏГ®ГЄГ Г§Г ГІГЁ ГўГ±Ві ГЄГ­ГЁГЈГЁ\n";
+        cout << "2. Г„Г®Г¤Г ГІГЁ ГЄГ­ГЁГЈГі Гў ГЄГ®ГёГЁГЄ\n";
 
         if (user->role == "admin") {
-            cout << "8. [ADMIN] Додати книгу\n";
-            cout << "9. [ADMIN] Видалити книгу\n";
+            cout << "8. [ADMIN] Г„Г®Г¤Г ГІГЁ ГЄГ­ГЁГЈГі\n";
+            cout << "9. [ADMIN] Г‚ГЁГ¤Г Г«ГЁГІГЁ ГЄГ­ГЁГЈГі\n";
         }
 
-        cout << "0. Назад\nВаш вибір: ";
+        cout << "0. ГЌГ Г§Г Г¤\nГ‚Г Гё ГўГЁГЎВіГ°: ";
         cin >> choice;
 
         switch (choice) {
@@ -148,25 +148,25 @@ void runCatalogModule(vector<Book>& db, vector<Book>& cart, const User* user) {
 
         case 8:
             if (user->role == "admin") adminAddBook(db);
-            else cout << "Доступ заборонено.\n";
+            else cout << "Г„Г®Г±ГІГіГЇ Г§Г ГЎГ®Г°Г®Г­ГҐГ­Г®.\n";
             break;
 
         case 9:
             if (user->role == "admin") adminDeleteBook(db);
-            else cout << "Доступ заборонено.\n";
+            else cout << "Г„Г®Г±ГІГіГЇ Г§Г ГЎГ®Г°Г®Г­ГҐГ­Г®.\n";
             break;
 
         case 0: break;
 
-        default: cout << "Невірний вибір.\n"; break;
+        default: cout << "ГЌГҐГўВіГ°Г­ГЁГ© ГўГЁГЎВіГ°.\n"; break;
         }
 
     } while (choice != 0);
 }
 
-// ---------------------------- ОПЛАТА ----------------------------
+// ---------------------------- ГЋГЏГ‹ГЂГ’ГЂ ----------------------------
 
-// Перевірка що введено лише цифри
+// ГЏГҐГ°ГҐГўВіГ°ГЄГ  Г№Г® ГўГўГҐГ¤ГҐГ­Г® Г«ГЁГёГҐ Г¶ГЁГґГ°ГЁ
 bool isDigitsOnly(const string& s) {
     for (char c : s)
         if (!isdigit(c)) return false;
@@ -176,18 +176,18 @@ bool isDigitsOnly(const string& s) {
 bool processPaymentLogic(const string& method, double amount) {
     if (amount <= 0) return false;
 
-    cout << "Обробка платежу на " << amount << " грн..." << endl;
+    cout << "ГЋГЎГ°Г®ГЎГЄГ  ГЇГ«Г ГІГҐГ¦Гі Г­Г  " << amount << " ГЈГ°Г­..." << endl;
 
     if (method == "card") {
         string card;
 
         while (true) {
-            cout << "Введіть номер картки (16 цифр): ";
+            cout << "Г‚ГўГҐГ¤ВіГІГј Г­Г®Г¬ГҐГ° ГЄГ Г°ГІГЄГЁ (16 Г¶ГЁГґГ°): ";
             cin >> card;
 
             if (card.length() == 16 && isDigitsOnly(card)) break;
 
-            cout << "[Помилка] Можна вводити ТІЛЬКИ цифри (16 символів).\n";
+            cout << "[ГЏГ®Г¬ГЁГ«ГЄГ ] ГЊГ®Г¦Г­Г  ГўГўГ®Г¤ГЁГІГЁ Г’ВІГ‹ГњГЉГ€ Г¶ГЁГґГ°ГЁ (16 Г±ГЁГ¬ГўГ®Г«ВіГў).\n";
         }
     }
 
@@ -197,39 +197,39 @@ bool processPaymentLogic(const string& method, double amount) {
 
 void runPaymentModule(vector<Book>& cart) {
     if (cart.empty()) {
-        cout << "Кошик порожній." << endl;
+        cout << "ГЉГ®ГёГЁГЄ ГЇГ®Г°Г®Г¦Г­ВіГ©." << endl;
         return;
     }
 
     double total = 0;
-    cout << "\n--- КАСА ---\nВаше замовлення:\n";
+    cout << "\n--- ГЉГЂГ‘ГЂ ---\nГ‚Г ГёГҐ Г§Г Г¬Г®ГўГ«ГҐГ­Г­Гї:\n";
 
     for (const auto& b : cart) {
-        cout << "- " << b.title << " (" << b.price << " грн)\n";
+        cout << "- " << b.title << " (" << b.price << " ГЈГ°Г­)\n";
         total += b.price;
     }
 
-    cout << "Разом: " << total << " грн\n";
+    cout << "ГђГ Г§Г®Г¬: " << total << " ГЈГ°Г­\n";
 
     string method;
-    cout << "Оберіть спосіб оплати (card/cash): ";
+    cout << "ГЋГЎГҐГ°ВіГІГј Г±ГЇГ®Г±ВіГЎ Г®ГЇГ«Г ГІГЁ (card/cash): ";
     cin >> method;
 
     string confirm;
-    cout << "Підтвердити оплату (y/n): ";
+    cout << "ГЏВіГ¤ГІГўГҐГ°Г¤ГЁГІГЁ Г®ГЇГ«Г ГІГі (y/n): ";
     cin >> confirm;
 
     if (confirm != "y" && confirm != "Y") {
-        cout << "Оплату скасовано.\n";
+        cout << "ГЋГЇГ«Г ГІГі Г±ГЄГ Г±Г®ГўГ Г­Г®.\n";
         return;
     }
 
     if (processPaymentLogic(method, total)) {
-        cout << "[УСПІХ] Оплата проведена!\n";
+        cout << "[Г“Г‘ГЏВІГ•] ГЋГЇГ«Г ГІГ  ГЇГ°Г®ГўГҐГ¤ГҐГ­Г !\n";
         cart.clear();
     }
     else {
-        cout << "[ПОМИЛКА] Транзакція відхилена.\n";
+        cout << "[ГЏГЋГЊГ€Г‹ГЉГЂ] Г’Г°Г Г­Г§Г ГЄГ¶ВіГї ГўВіГ¤ГµГЁГ«ГҐГ­Г .\n";
     }
 }
 
@@ -250,20 +250,21 @@ int main() {
 
     int choice;
     do {
-        cout << "\n===== ГОЛОВНЕ МЕНЮ =====" << endl;
-        cout << "1. Каталог книг\n";
-        cout << "2. Оплата (товарів у кошику: " << cart.size() << ")\n";
-        cout << "3. Вихід\nВаш вибір: ";
+        cout << "\n===== ГѓГЋГ‹ГЋГ‚ГЌГ… ГЊГ…ГЌГћ =====" << endl;
+        cout << "1. ГЉГ ГІГ Г«Г®ГЈ ГЄГ­ГЁГЈ\n";
+        cout << "2. ГЋГЇГ«Г ГІГ  (ГІГ®ГўГ Г°ВіГў Гі ГЄГ®ГёГЁГЄГі: " << cart.size() << ")\n";
+        cout << "3. Г‚ГЁГµВіГ¤\nГ‚Г Гё ГўГЁГЎВіГ°: ";
         cin >> choice;
 
         switch (choice) {
         case 1: runCatalogModule(books, cart, currentUser); break;
         case 2: runPaymentModule(cart); break;
-        case 3: cout << "До побачення!\n"; break;
-        default: cout << "Помилка вводу.\n"; break;
+        case 3: cout << "Г„Г® ГЇГ®ГЎГ Г·ГҐГ­Г­Гї!\n"; break;
+        default: cout << "ГЏГ®Г¬ГЁГ«ГЄГ  ГўГўГ®Г¤Гі.\n"; break;
         }
 
     } while (choice != 3);
 
     return 0;
 }
+
