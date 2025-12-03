@@ -6,7 +6,7 @@
 #include <windows.h>
 using namespace std;
 
-//--------------------ТЕСТ----------------
+cout << "--- КАТАЛОГ ТОВАРІВ (v2.0) ---" << endl;
 
 struct User {
     string username;
