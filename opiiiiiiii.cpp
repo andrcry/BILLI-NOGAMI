@@ -7,6 +7,7 @@
 using namespace std;
 
 cout << "--- КАТАЛОГ ТОВАРІВ (v2.0) ---" << endl;
+
 struct User {
     string username;
     string password;
